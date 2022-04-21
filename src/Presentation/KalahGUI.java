@@ -229,14 +229,14 @@ public class KalahGUI extends JFrame {
     }
 
     /*
-     * Metodo para cambiar el color principal y el color secundario del tablero
+     * Method to change the main color and the secondary color of the board
      */
     private void changeColorAction(){
         JColorChooser colorChooser = new JColorChooser();
-        Color nuevoColorP = JColorChooser.showDialog(this, "Seleccione un nuevo color principal", Color.BLUE);
-        Color nuevoColorS = JColorChooser.showDialog(this, "Seleccione un nuevo color secundario", Color.RED);
-        if(nuevoColorP != null && nuevoColorS != null){
-            MAJOR_COLOR = nuevoColorP;
+        Color newMainColor = JColorChooser.showDialog(this, "Select new main color", MAJOR_COLOR);
+        Color nuevoColorS = JColorChooser.showDialog(this, "Select secondary color", SECONDARY_COLOR);
+        if(newMainColor != null && nuevoColorS != null){
+            MAJOR_COLOR = newMainColor;
             SECONDARY_COLOR = nuevoColorS;
         }
         refresh();
