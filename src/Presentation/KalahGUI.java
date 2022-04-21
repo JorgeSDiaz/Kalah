@@ -28,6 +28,9 @@ public class KalahGUI extends JFrame {
     /* File Chooser */
     private JFileChooser fileChooser;
 
+    /* Color Chooser */
+    private JColorChooser colorChooser;
+
     /* Main Window Attributes */
     private JPanel gameContainer, containerMovementsMade, containerCantSeedsStockOne, containerCantSeedsStockTwo, gameDashboard;
     private JButton start, restart, setUp;
@@ -232,7 +235,7 @@ public class KalahGUI extends JFrame {
      * Method to change the main color and the secondary color of the board
      */
     private void changeColorAction(){
-        JColorChooser colorChooser = new JColorChooser();
+        colorChooser = new JColorChooser();
         Color newMainColor = JColorChooser.showDialog(this, "Select new main color", MAJOR_COLOR);
         Color nuevoColorS = JColorChooser.showDialog(this, "Select secondary color", SECONDARY_COLOR);
         if(newMainColor != null && nuevoColorS != null){
