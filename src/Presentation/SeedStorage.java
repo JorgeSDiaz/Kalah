@@ -4,7 +4,7 @@ import Domain.Kalah;
 
 import java.awt.*;
 
-public class SeedStorage extends Screen{
+public class SeedStorage extends ScreenData{
     private String cantSeeds;
     private int playerOwner;
 
@@ -13,6 +13,7 @@ public class SeedStorage extends Screen{
         playerOwner = owner;
     }
 
+    @Override
     public void refresh(){
         cantSeeds = String.valueOf(this.kalah.getWareHouseSeeds(playerOwner - 1));
     }

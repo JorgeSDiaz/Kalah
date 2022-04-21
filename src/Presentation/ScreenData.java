@@ -5,10 +5,10 @@ import Domain.Kalah;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class Screen extends JPanel {
+public abstract class ScreenData extends JPanel {
     protected final Kalah kalah;
 
-    public Screen(Kalah kalah, char align, int horizontalGap, int verticalGap, int sizeFont){
+    public ScreenData(Kalah kalah, char align, int horizontalGap, int verticalGap, int sizeFont){
         this.kalah = kalah;
         prepareScreen(align, horizontalGap, verticalGap);
         setFont(new Font(Font.SANS_SERIF, Font.BOLD, sizeFont));

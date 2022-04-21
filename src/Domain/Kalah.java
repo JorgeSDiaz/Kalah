@@ -13,7 +13,7 @@ public class Kalah
     static private int dimension = 6;
     static private int casas = 6;
     //private Casa[][] tablero;
-    static private int movimientosRealizados = 0;
+    static private int movements = 0;
 
     /**
      * Constructor for objects of class Kalah
@@ -29,8 +29,8 @@ public class Kalah
         return wareHouseSeeds[player];
     }
 
-    public static int getMovimientosRealizados() {
-        return movimientosRealizados;
+    public int getMovements() {
+        return movements;
     }
 
 }

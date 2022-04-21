@@ -116,11 +116,11 @@ public class KalahGUI extends JFrame {
         gameContainer.add(cantSeedsContainer, BorderLayout.EAST);
 
         // Poner el panel de movimientos realizados en la zona East
-        containerMovementsMade = new PantallaMovimientosRealizados(this);
+        containerMovementsMade = new Movements(this.kalah, 'c');
         gameContainer.add(containerMovementsMade, BorderLayout.NORTH);
 
         // Poner el panel del juego en la zona Center
-        gameDashboard = new PantallaJuego(this);
+        gameDashboard = new GameScreen(this);
         gameContainer.add(gameDashboard, BorderLayout.CENTER);
 
         // Prepara los botones de juego
@@ -246,10 +246,6 @@ public class KalahGUI extends JFrame {
 
     public static void main(String[] args){
         new KalahGUI();
-    }
-
-    public int getMovimientosRealizados(){
-        return kalah.getMovimientosRealizados();
     }
 }
 
