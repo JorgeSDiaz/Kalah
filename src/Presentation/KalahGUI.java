@@ -102,12 +102,12 @@ public class KalahGUI extends JFrame {
      * prepare/set graphic elements of Kalah Board
      */
     private void prepareElementsBoard() {
-        // Poner el panel principal que contiene los diferentes elementos
+        /* Set up the main panel containing the different elements */
         gameContainer = new JPanel();
         gameContainer.setBackground(Color.RED);
         gameContainer.setLayout(new BorderLayout());
         add(gameContainer);
-        // Poner el panel de numero de semillas en los dos almacenes en la zona East
+        /* Place the seed number panel in the two warehouses in the East zone */
         JPanel cantSeedsContainer = new JPanel();
         containerCantSeedsStockOne = new SeedStorage(this.kalah, 'l', 100, 1);
         cantSeedsContainer.add(containerCantSeedsStockOne);
@@ -115,28 +115,25 @@ public class KalahGUI extends JFrame {
         cantSeedsContainer.add(containerCantSeedsStockTwo);
         gameContainer.add(cantSeedsContainer, BorderLayout.EAST);
 
-        // Poner el panel de movimientos realizados en la zona East
+        /* Place the movement panel in the East zone */
         containerMovementsMade = new Movements(this.kalah, 'c');
         gameContainer.add(containerMovementsMade, BorderLayout.NORTH);
 
-        // Poner el panel del juego en la zona Center
+        /* Place the game panel in the Center zone */
         gameDashboard = new GameScreen(this);
         gameContainer.add(gameDashboard, BorderLayout.CENTER);
 
-        // Prepara los botones de juego
-        JPanel contenedorBotones = new JPanel();
+        /* Prepare the game buttons */
+        JPanel buttonContainer = new JPanel();
         start = new JButton("Play");
         restart = new JButton("Restart");
         setUp = new JButton("Set Up");
-        contenedorBotones.add(start);
-        contenedorBotones.add(restart);
-        contenedorBotones.add(setUp);
-        gameContainer.add(contenedorBotones, BorderLayout.SOUTH);
+        buttonContainer.add(start);
+        buttonContainer.add(restart);
+        buttonContainer.add(setUp);
+        gameContainer.add(buttonContainer, BorderLayout.SOUTH);
 
-        gameDashboard.repaint();
-        containerCantSeedsStockOne.repaint();
-        containerCantSeedsStockTwo.repaint();
-        containerMovementsMade.repaint();
+        refresh();
     }
 
     private void refresh(){
@@ -236,12 +233,13 @@ public class KalahGUI extends JFrame {
      */
     private void changeColorAction(){
         JColorChooser colorChooser = new JColorChooser();
-        Color nuevoColorP = colorChooser.showDialog(this, "Seleccione un nuevo color principal", Color.BLUE);
-        Color nuevoColorS = colorChooser.showDialog(this, "Seleccione un nuevo color secundario", Color.RED);
+        Color nuevoColorP = JColorChooser.showDialog(this, "Seleccione un nuevo color principal", Color.BLUE);
+        Color nuevoColorS = JColorChooser.showDialog(this, "Seleccione un nuevo color secundario", Color.RED);
         if(nuevoColorP != null && nuevoColorS != null){
             MAJOR_COLOR = nuevoColorP;
             SECONDARY_COLOR = nuevoColorS;
         }
+        refresh();
     }
 
     public static void main(String[] args){
