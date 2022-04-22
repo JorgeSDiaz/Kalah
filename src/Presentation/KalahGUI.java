@@ -1,4 +1,5 @@
 package Presentation;
+import Domain.ExceptionKalah;
 import Domain.Kalah;
 import javax.swing.*;
 import java.awt.*;
@@ -38,10 +39,14 @@ public class KalahGUI extends JFrame {
     /**
      * KalahGUI Constructor
      */
-    public KalahGUI(){
-        kalah = new Kalah();
-        prepareElements();
-        prepareActions();
+    public KalahGUI() {
+        try{
+            kalah = new Kalah(7, 2);
+            prepareElements();
+            prepareActions();
+        } catch (ExceptionKalah kg){
+            JOptionPane.showMessageDialog(null, kg.getMessage());
+        }
     }
 
     /**

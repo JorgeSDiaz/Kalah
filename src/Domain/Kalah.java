@@ -1,5 +1,10 @@
 package Domain;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Write a description of class Kalah here.
  * 
@@ -18,7 +23,8 @@ public class Kalah
      * @param houses How many houses to play with
      * @param seeds How many seeds each house starts with
      */
-    public Kalah(int houses, int seeds){
+    public Kalah(int houses, int seeds) throws ExceptionKalah{
+        inRangeException(houses, seeds);
         movements = 0;
         player = 1;
         housesSeeds = new int[]{houses, seeds};
@@ -28,8 +34,16 @@ public class Kalah
     /**
      * constructor for kalah class objects with base and standard data
      */
-    public Kalah() {
+    public Kalah() throws ExceptionKalah{
         this(6, 3);
+    }
+
+    private void inRangeException(int houses, int seeds) throws ExceptionKalah{
+        if (houses < 6){
+            throw new ExceptionKalah(ExceptionKalah.MINIMUM_HOUSES);
+        } if (seeds < 3){
+            throw new ExceptionKalah(ExceptionKalah.MINIMUM_SEEDS);
+        }
     }
 
     /**
@@ -49,16 +63,17 @@ public class Kalah
      * @param player Player making the move
      * @param house house on which the movement is to be made
      */
-    public void play(int player, int house) {
+    public void play(int player, int house) throws ExceptionKalah{
+        correctPlayerHouseException(player, house);
         boolean intoWareHouse = false;
         movements += 1;
         if (board[player][house] != 0) {
             for (int i = 1; i < board[player][house] + 1; i++) {
-                if (house + i == housesSeeds[0]) {
+                if (house + i == housesSeeds[0] + 1) {
                     board[player][0] += 1;
                     intoWareHouse = true;
                 } else if (house + i > housesSeeds[0]){
-                    board[player == 1 ? 0 : 1][(house + i) % housesSeeds[1]] += 1;
+                    board[player == 1 ? 0 : 1][((house + i - 1) % housesSeeds[1])] += 1;
                     if ((house + i) % housesSeeds[1] == housesSeeds[0]){
                         board[player == 1 ? 0 : 1][0] += 1;
                     }
@@ -71,10 +86,21 @@ public class Kalah
                     }
                 }
             }
+            board[player][house] = 0;
         }
 
         if (!intoWareHouse){
-            this.player = (player % 2) + 1;
+            this.player = ((player + 1) % 2) + 1;
+        }
+    }
+
+    private void correctPlayerHouseException(int player, int house) throws ExceptionKalah {
+        if (player > 1){
+            throw new ExceptionKalah(ExceptionKalah.NOT_A_PLAYER);
+        } if (house > this.housesSeeds[0] || house == 0){
+            throw new ExceptionKalah(ExceptionKalah.OUT_OF_RANGE_HOUSE);
+        } if (board[player][house] == 0){
+            throw new ExceptionKalah(ExceptionKalah.SEEDLESS);
         }
     }
 
@@ -83,14 +109,17 @@ public class Kalah
      * @return game over
      */
     public boolean endGame(){
-        boolean veredict = true;
+        boolean veredict = false;
         for (int[] i : board){
-            int j = 1;
-            while (veredict && j < i.length + 1){
+            boolean next = false;
+            for (int j = 1; j < housesSeeds[0] + 1; j++){
                 if (i[j] != 0){
-                    veredict = false;
+                    next = true;
                 }
-                j += 1;
+            }
+            if (!next){
+                veredict = true;
+                break;
             }
         }
         return veredict;
@@ -110,7 +139,7 @@ public class Kalah
 
     /**
      * Who is currently playing
-     * @return
+     * @return current player
      */
     public int player(){
         return player;
@@ -131,6 +160,10 @@ public class Kalah
      */
     public int getWareHouseSeeds(int player) {
         return board[player][0];
+    }
+
+    public void setBoard(int[][] newBoard){
+        this.board = newBoard;
     }
 
     /**
