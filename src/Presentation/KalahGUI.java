@@ -39,7 +39,7 @@ public class KalahGUI extends JFrame {
      * KalahGUI Constructor
      */
     public KalahGUI(){
-        kalah = new Kalah(6,3);
+        kalah = new Kalah();
         prepareElements();
         prepareActions();
     }
